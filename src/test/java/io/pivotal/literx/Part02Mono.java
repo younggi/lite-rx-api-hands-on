@@ -44,7 +44,8 @@ public class Part02Mono {
 
 	// TODO Return an Mono that never emit any signal
 	Mono<String> monoWithNoSignal() {
-		return Mono.create(m -> {});
+		return Mono.never();
+//		return Mono.create(m -> {});
 	}
 
 //========================================================================================
@@ -60,9 +61,10 @@ public class Part02Mono {
 
 	// TODO Return a Mono that contains a "foo" value
 	Mono<String> fooMono() {
-		return Mono.create(m -> {
-			m.success("foo");
-		});
+		return Mono.just("foo");
+//		return Mono.create(m -> {
+//			m.success("foo");
+//		});
 	}
 
 //========================================================================================
@@ -77,7 +79,8 @@ public class Part02Mono {
 
 	// TODO Create a Mono that emits an IllegalStateException
 	Mono<String> errorMono() {
-		return Mono.create(m -> { m.error(new IllegalStateException());});
+		return Mono.error(new IllegalStateException());
+//		return Mono.create(m -> { m.error(new IllegalStateException());});
 	}
 
 }
