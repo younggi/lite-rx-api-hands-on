@@ -48,12 +48,12 @@ public class Part01Flux {
 
 	// TODO Return a Flux that contains 2 values "foo" and "bar" without using an array or a collection
 	Flux<String> fooBarFluxFromValues() {
-
-		return Flux.create(s -> {
-      s.next("foo");
-      s.next("bar");
-      s.complete();
-    });
+    return Flux.just("foo","bar");
+//		return Flux.create(s -> {
+//      s.next("foo");
+//      s.next("bar");
+//      s.complete();
+//    });
 	}
 
 //========================================================================================
@@ -84,7 +84,8 @@ public class Part01Flux {
 	}
 	// TODO Create a Flux that emits an IllegalStateException
 	Flux<String> errorFlux() {
-		return Flux.create(s -> s.error(new IllegalStateException()));
+    return Flux.error(new IllegalStateException());
+//    return Flux.create(s -> s.error(new IllegalStateException()));
 	}
 
 //========================================================================================
@@ -100,10 +101,12 @@ public class Part01Flux {
 
 	// TODO Create a Flux that emits increasing values from 0 to 9 each 100ms
 	Flux<Long> counter() {
-		return Flux.<Long>create(s -> {
-      Stream.iterate(0L, l -> l + 1).limit(10).forEach(l -> s.next(l));
-      s.complete();
-    }).delay(Duration.ofMillis(100));
+	    return Flux.fromStream(Stream.iterate(0L, l -> l + 1).limit(10))
+          .delay(Duration.ofMillis(100));
+//		return Flux.<Long>create(s -> {
+//      Stream.iterate(0L, l -> l + 1).limit(10).forEach(l -> s.next(l));
+//      s.complete();
+//    }).delay(Duration.ofMillis(100));
 	}
 
 }
